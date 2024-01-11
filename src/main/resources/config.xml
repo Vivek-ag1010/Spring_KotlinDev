@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+
+	<!-- Your bean definitions go here -->
 
 	<!--<bean id="sim" class="com.springProject.Airtel"/>-->
 	<!--<bean id="voda" class="com.springProject.Vodafone"/>-->
@@ -34,13 +40,13 @@
 
 	<bean id="music1" class="com.setterObjectDepencies.Music">
 		<property name="playMusic">
-			<bean class="com.setterObjectDepencies.PlayMusic"/>
+			<bean class="com.setterObjectDepencies.PlayMusic" />
 		</property>
 	</bean>
 
 	<bean id="anotherMusic1" class="com.setterObjectDepencies.AnotherMusic">
 		<property name="playMusic">
-			<bean class="com.setterObjectDepencies.PlayMusic"/>
+			<bean class="com.setterObjectDepencies.PlayMusic" />
 		</property>
 	</bean>
 
@@ -62,4 +68,50 @@
 		<property name="playMusic" ref="playMus">
 		</property>
 	</bean>
+
+	<!-- Object Dependencies via interface-->
+	<bean id="math" class="com.looseCouplingEx1.MathCheat" />
+	<bean id="science" class="com.looseCouplingEx1.ScienceCheat" />
+
+	<bean id="studentCheat1" class="com.looseCouplingEx1.StudentCheat">
+		<property name="cheat" ref="math" />
+	</bean>
+	<bean id="studentCheat2" class="com.looseCouplingEx1.StudentCheat">
+		<property name="cheat" ref="science" />
+	</bean>
+
+	<!--Autowiring in xml-->
+
+	<bean id="teach" class="com.xml.autowired.Teaching" />
+	<bean id="teacher1" class="com.xml.autowired.Teacher">
+		<property name="teach" ref="teach"></property>
+	</bean>
+	<bean id="teacher2" class="com.xml.autowired.Teacher" autowire="default">
+		<property name="teach" ref="teach"></property>
+	</bean>
+
+	<bean id="teacher3" class="com.xml.autowired.Teacher" autowire="byName">
+	</bean>
+
+
+	<bean id="teacher4" class="com.xml.autowired.Teacher" autowire="byType">
+	</bean>
+
+	<bean id="teacher5" class="com.xml.autowired.Teacher" autowire="constructor">
+	</bean>
+
+	<!-- autowiring via Annotation we use context xsd- and autowire-context
+	element-->
+	<bean id="hearObjectValue" class="com.annotation.autowired.Heart" />
+	<bean id="human" class="com.annotation.autowired.Human" />
+
 </beans>
+
+
+
+
+
+
+
+
+
