@@ -1,11 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    
-    <!--<bean id="sim" class="com.springProject.Airtel"/>-->
+	<!--<bean id="sim" class="com.springProject.Airtel"/>-->
 	<!--<bean id="voda" class="com.springProject.Vodafone"/>-->
-	<bean id="sim" class="com.springProject.Jio"/>
+	<!--<bean id="sim" class="com.springProject.Jio"/>-->
+
+	<!--Setter Injection-->
+
+	<bean id="student1" class="com.setterInjection.spring.Student">
+		<property name="studentName" value="Gogo Gupta" />
+		<property name="id" value="15"></property>
+	</bean>
+
+	<bean id="student2" class="com.setterInjection.spring.Student">
+		<property name="studentName" value="Vivek Agrahari" />
+		<property name="id" value="25"></property>
+	</bean>   <!--can make many objects like this of Students-->
+
+	<bean id="emp1" class="com.constructorInject.springCore.Employee">
+		<constructor-arg name="empName" value="Yoyo Singh" />
+		<constructor-arg name="empId" value="15" />
+	</bean>
+
+	<bean id="emp2" class="com.constructorInject.springCore.Employee">
+		<constructor-arg name="empId" value="20" />
+	</bean>
+
+	<bean id="emp3" class="com.constructorInject.springCore.Employee">
+		<constructor-arg name="empId" value="25" type="int" />
+	</bean>
+
+	<bean id="music1" class="com.setterObjectDepencies.Music">
+		<property name="playMusic">
+			<bean class="com.setterObjectDepencies.PlayMusic"/>
+		</property>
+	</bean>
+
+	<bean id="anotherMusic1" class="com.setterObjectDepencies.AnotherMusic">
+		<property name="playMusic">
+			<bean class="com.setterObjectDepencies.PlayMusic"/>
+		</property>
+	</bean>
+
+	<!-- Creating injected separately and will use their reference-->
+	<bean id="playMus" class="com.setterObjectDepencies.PlayMusic" />
+
+	<bean id="music2" class="com.setterObjectDepencies.Music">
+		<property name="playMusic" ref="playMus">
+
+		</property>
+	</bean>
+	<bean id="anotherMusic2" class="com.setterObjectDepencies.AnotherMusic">
+		<property name="playMusic" ref="playMus">
+
+		</property>
+	</bean>
+
+	<bean id="engmusic1" class="com.setterObjectDepencies.EnglishMusic">
+		<property name="playMusic" ref="playMus">
+		</property>
+	</bean>
 </beans>
